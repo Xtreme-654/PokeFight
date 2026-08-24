@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <img src="../Assets/pixel_pokeball.png" alt="" >
+            <img src="../Assets/pokefight-logo.png" alt="" style="width: 100px;">
+        </div>
+        <div class="div_infos">
+            <img src="../Assets/" alt="pinto">
+        </div>
+
+
+    </nav>
+    <div class="site">
+        <div style="padding: 50px;">
+            <div class="div_login" id="div_login">
+                <img src="../Assets/pokefight-logo2.png" alt="">
+                <input type="text" id="" placeholder="Qual o nome do usuário?">
+                <input type="password" id="" placeholder="Qual a senha do usuário?">
+                <div style="flex-direction: row; display: flex; width: 30%; justify-content: center;">
+                    <button style="background-color: rgba(0, 153, 255, 0.7);
+                     border: 2px solid rgb(0, 153, 255);
+                     color: rgb(255, 255, 255)"
+
+                     onclick="logar()">Logar</button>
+                    
+                    <h3 style="margin: 0;
+                     align-self: center;
+                     width: 100px;
+                     padding-bottom: 10px;
+                      padding-left: 5%;">Não possui cadastro?</h3>
+                    
+                    <button onclick="f_cadastro()">Cadastrar</button>
+                </div>
+            </div>
+
+            <div class="div_cadastro" id="div_cadastro">
+                <img src="../Assets/pokefight-logo2.png" alt="">
+                <div class="div_formulario">
+                    <p>Digite um nome para o seu treinador</p>
+                    <input type="text" id="" placeholder="Sugestão: Treinador_zard">
+                    <p>Digite uma senha para futuros logins</p>
+                    <input type="text" id="" placeholder="Sugestão: Zd1m_@daP.">
+                </div>
+                <div class="div_treinador">
+                    <p>Escolha seu treinador</p>
+                        <div style="flex-direction: row; display: flex;">
+                                <img src="../Assets/fem_trainer1.png" alt="">
+                                <input type="radio" id="" value="" name="treinador">
+                                <img src="../Assets/men_trainer1.png" alt="">
+                                <input type="radio" id="" value="" name="treinador">
+                        </div>
+                        <div style="flex-direction: row; display: flex;">
+                                <img src="../Assets/fem_trainer2.png" alt="">
+                                <input type="radio" id="" value="" name="treinador">
+                                <img src="../Assets/men_trainer2.png" alt="">
+                                <input type="radio" id="" value="" name="treinador">
+                        </div>
+                        <div class="div_pokemon">
+                            <p>Escolha seus pokemons</p>
+                            <div class="info">
+                                <p>Primeiro Pokemon</p>
+                                <p>Segundo Pokemon</p>
+                                <p>Terceiro Pokemon</p>
+                            </div>
+                            <div class="container">
+                                <select name="" id="pokemon1"></select>
+                                <select name="" id="pokemon2"></select>
+                                <select name="" id="pokemon3"></select>
+                            </div>
+
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
+
+<script>
+    var nome_usuario = sessionStorage.nome
+
+
+    const pokemons = [
+        { value: "pikachu", label: "Pikachu"},
+        { value: "charmander", label: "Charmander" },
+        { value: "bulbasaur", label: "Bulbasaur" },
+        { value: "squirtle", label: "Squirtle" }
+    ];
+
+    const optionsHTML = pokemons
+    .map(poke => `<option value="${poke.value}">${poke.label}</option>`)
+    .join('');
+
+    const selects = document.querySelectorAll('.container select');
+    selects.forEach(select => {
+    select.innerHTML = optionsHTML;
+    });
+    function f_cadastro(){
+        div_login.style.display = 'none';
+        div_cadastro.style.display = 'flex';
+    }
+
+    function f_login(nome_usuario){
+        if (nome_usuario == null){
+            
+        }else{
+
+        }
+    }
+</script>
