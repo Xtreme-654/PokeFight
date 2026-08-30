@@ -1,55 +1,59 @@
 body {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-weight: bold;
     font-family: 'Pixelify Sans', sans-serif;
 }
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-.navbar{
-    display:flex;
-    background-color:rgb(0, 153, 255);
-    width:100%;
-    height: 50px;
-    justify-content:space-between;
-    flex-direction:row;
 
-}.navbar .container{
-    width: 50%;
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+.navbar {
+    display: flex;
+    background-color: rgb(0, 153, 255);
+    width: 100%;
+    height: 50px;
+    flex-direction: row;
+
 }
-.navbar .div_infos{
-    width: 50%;
-    display:flex;
-    flex-direction:row;
-    justify-content:flex-end;
+
+.navbar .container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
-.navbar .container img{
+
+.navbar .container img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-left: 10px;
 
 }
-.site{
+
+.site {
     background-image: url(../Assets/imagem_fundo.png);
     background-size: cover;
     background-position: center;
     height: 100vh;
 }
-.div_login{
-    display:flex; 
+
+.div_login {
+    display: flex;
     padding-top: 20px;
-    justify-self:center;
+    justify-self: center;
     border-radius: 10px;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
     height: 80vh;
     width: 80%;
     z-index: 9999;
     background-color: rgba(231, 231, 231, 0.5);
     overflow: hidden;
     flex-direction: column;
-} .div_login input{
+}
+
+.div_login input {
     width: 30%;
     height: 40px;
     border-radius: 5px;
@@ -59,7 +63,9 @@ body {
     background-color: rgba(231, 231, 231, 0.5);
     font-weight: bold;
     font-family: 'Pixelify Sans', sans-serif;
-}.div_login button{
+}
+
+.div_login button {
     margin-bottom: 0px;
     width: 40%;
     height: 40px;
@@ -72,22 +78,25 @@ body {
     cursor: pointer;
     font-weight: bold;
     font-family: 'Pixelify Sans', sans-serif;
-}.div_login h3{
-    display:flex;
+}
+
+.div_login h3 {
+    display: flex;
     align-content: center;
-    margin:0;
+    margin: 0;
     margin-bottom: 0px;
     color: rgb(121, 121, 121);
     font-size: 10px;
     margin-bottom: 20px;
 }
-.div_cadastro{
-    display:none; 
+
+.div_cadastro {
+    display: none;
     padding-top: 20px;
-    justify-self:center;
+    justify-self: center;
     border-radius: 10px;
-    justify-content:center;
-    align-items:center;
+    justify-content: center;
+    align-items: center;
     height: 90vh;
     width: 80%;
     z-index: 9999;
@@ -95,20 +104,23 @@ body {
     overflow: hidden;
     flex-direction: column;
     overflow-y: auto;
-} 
-.div_cadastro .div_formulario{
-    width: 20%;
-    display:flex;
-    flex-direction:column;
-   align-items:center;
 }
-.div_formulario p{
+
+.div_cadastro .div_formulario {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div_formulario p {
     margin: 0px;
-    display:flex;
-    align-self:flex-start;
+    display: flex;
+    align-self: flex-start;
     color: rgb(92, 92, 92)
 }
-.div_formulario input{
+
+.div_formulario input {
     width: 100%;
     height: 40px;
     border-radius: 5px;
@@ -116,47 +128,86 @@ body {
     padding-left: 10px;
     margin-bottom: 10px;
     background-color: rgba(231, 231, 231, 0.5);
-    
+
 }
-.div_treinador{
-    display:flex;
-    flex-direction:column;
+
+.div_treinador {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    align-items:center;
+    align-items: center;
 }
-.div_treinador p{
+
+.div_treinador p {
     margin-bottom: 0px;
     font-size: 20px;
     color: rgb(92, 92, 92);
     font-weight: bold;
     font-family: 'Pixelify Sans', sans-serif;
 }
-.div_treinador img{
+
+.div_treinador img {
     width: 120px;
     height: 120px;
 }
-.div_treinador input{
+
+.div_treinador input {
     cursor: pointer;
 }
-.div_pokemon{
-    display:flex;
-    flex-direction:column;
-    width: 100%;
-    align-items:center;
+
+.div_cadastro button {
+    margin-top: 20px;
+    width: 20%;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid rgb(121, 121, 121);
+    color: rgb(121, 121, 121);
+    padding-left: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(231, 231, 231, 0.5);
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Pixelify Sans', sans-serif;
 }
-.div_pokemon .container{
-    display:flex;
-    justify-content:space-between;
-    width: 100%;
-    flex-direction:row;
+
+.div_escolha_pokemon {
+    display: none;
+    padding-top: 20px;
+    justify-self: center;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 80%;
+    z-index: 9999;
+    background-color: rgba(231, 231, 231, 0.5);
+    overflow: hidden;
+    flex-direction: column;
+    overflow-y: auto;
 }
-.div_pokemon .info{
-    display:flex;
+
+.div_pokemon {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.div_pokemon .container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
+}
+
+.div_pokemon .info {
+    display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content:space-between;
+    justify-content: space-around;
 }
-.div_pokemon select{
+
+.div_pokemon select {
     width: 100%;
     height: 40px;
     border-radius: 5px;
@@ -167,4 +218,31 @@ body {
     font-weight: bold;
     font-family: 'Pixelify Sans', sans-serif;
     overflow-y: auto;
+}
+
+.div_imagens_pokemons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.div_imagens_pokemons img {
+    width: 120px;
+    height: 120px;
+}
+
+.div_escolha_pokemon button{
+    margin-top: 20px;
+    width: 20%;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid rgb(121, 121, 121);
+    color: rgb(121, 121, 121);
+    padding-left: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(231, 231, 231, 0.5);
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Pixelify Sans', sans-serif;
 }

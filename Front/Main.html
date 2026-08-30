@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
-<body>
+
+<body onload="carregarPokemons()">
     <nav class="navbar">
         <div class="container">
-            <img src="../Assets/pixel_pokeball.png" alt="" >
+            <img src="../Assets/pixel_pokeball.png" alt="">
             <img src="../Assets/pokefight-logo.png" alt="" style="width: 100px;">
-        </div>
-        <div class="div_infos">
-            <img src="../Assets/" alt="pinto">
         </div>
 
 
@@ -24,21 +23,19 @@
         <div style="padding: 50px;">
             <div class="div_login" id="div_login">
                 <img src="../Assets/pokefight-logo2.png" alt="">
-                <input type="text" id="" placeholder="Qual o nome do usuário?">
-                <input type="password" id="" placeholder="Qual a senha do usuário?">
+                <input type="text" id="nome_treinador_login_input" placeholder="Qual o nome do usuário?">
+                <input type="password" id="senha_treinador_login_input" placeholder="Qual a senha do usuário?">
                 <div style="flex-direction: row; display: flex; width: 30%; justify-content: center;">
                     <button style="background-color: rgba(0, 153, 255, 0.7);
                      border: 2px solid rgb(0, 153, 255);
-                     color: rgb(255, 255, 255)"
+                     color: rgb(255, 255, 255)" onclick="logar()">Logar</button>
 
-                     onclick="logar()">Logar</button>
-                    
                     <h3 style="margin: 0;
                      align-self: center;
                      width: 100px;
                      padding-bottom: 10px;
                       padding-left: 5%;">Não possui cadastro?</h3>
-                    
+
                     <button onclick="f_cadastro()">Cadastrar</button>
                 </div>
             </div>
@@ -47,76 +44,281 @@
                 <img src="../Assets/pokefight-logo2.png" alt="">
                 <div class="div_formulario">
                     <p>Digite um nome para o seu treinador</p>
-                    <input type="text" id="" placeholder="Sugestão: Treinador_zard">
+                    <input type="text" id="nome_treinador_cadastro_input" placeholder="Sugestão: Treinador_zard">
                     <p>Digite uma senha para futuros logins</p>
-                    <input type="text" id="" placeholder="Sugestão: Zd1m_@daP.">
+                    <input type="text" id="senha_treinador_cadastro_input" placeholder="Sugestão: Zd1m_@daP.">
                 </div>
+
+
                 <div class="div_treinador">
                     <p>Escolha seu treinador</p>
-                        <div style="flex-direction: row; display: flex;">
-                                <img src="../Assets/fem_trainer1.png" alt="">
-                                <input type="radio" id="" value="" name="treinador">
-                                <img src="../Assets/men_trainer1.png" alt="">
-                                <input type="radio" id="" value="" name="treinador">
-                        </div>
-                        <div style="flex-direction: row; display: flex;">
-                                <img src="../Assets/fem_trainer2.png" alt="">
-                                <input type="radio" id="" value="" name="treinador">
-                                <img src="../Assets/men_trainer2.png" alt="">
-                                <input type="radio" id="" value="" name="treinador">
-                        </div>
-                        <div class="div_pokemon">
-                            <p>Escolha seus pokemons</p>
-                            <div class="info">
-                                <p>Primeiro Pokemon</p>
-                                <p>Segundo Pokemon</p>
-                                <p>Terceiro Pokemon</p>
-                            </div>
-                            <div class="container">
-                                <select name="" id="pokemon1"></select>
-                                <select name="" id="pokemon2"></select>
-                                <select name="" id="pokemon3"></select>
-                            </div>
+                    <div style="flex-direction: row; display: flex;">
+                        <img src="../Assets/fem_trainer1.png" alt="">
+                        <input type="radio" id="personagem_treinador_input" value="fem_trainer1" name="treinador">
+                        <img src="../Assets/men_trainer1.png" alt="">
+                        <input type="radio" id="personagem_treinador_input" value="men_trainer1" name="treinador">
 
+                        <img src="../Assets/fem_trainer2.png" alt="">
+                        <input type="radio" id="personagem_treinador_input" value="fem_trainer2" name="treinador">
+                        <img src="../Assets/men_trainer2.png" alt="">
+                        <input type="radio" id="personagem_treinador_input" value="men_trainer2" name="treinador">
                     </div>
+                    <button style="background-color: rgba(0, 153, 255, 0.7);
+                     border: 2px solid rgb(0, 153, 255);
+                     color: rgb(255, 255, 255)" onclick="cadastrar()">cadastrar</button>
                 </div>
-            
             </div>
+
+
+            <div class="div_escolha_pokemon" id="div_escolha_pokemon">
+                <img src="../Assets/pokefight-logo2.png" alt="">
+                <div class="div_pokemon">
+                    <p style="font-size: 30px;">Escolha seus pokemons</p>
+                    <div class="info">
+                        <p>Primeiro Pokemon</p>
+                        <p>Segundo Pokemon</p>
+                        <p>Terceiro Pokemon</p>
+                    </div>
+                    <div class="container">
+                        <select name="pokemon1" id="pokemon1" onchange="atualizarImagem(this, 'img_pokemon1')"></select>
+                        <select name="pokemon2" id="pokemon2" onchange="atualizarImagem(this, 'img_pokemon2')"></select>
+                        <select name="pokemon3" id="pokemon3" onchange="atualizarImagem(this, 'img_pokemon3')"></select>
+                    </div>
+                    <div class="div_imagens_pokemons">
+                        <img src="" id="img_pokemon1">
+                        <img src="" id="img_pokemon2">
+                        <img src="" id="img_pokemon3">
+                    </div>
+                    <button style="background-color: rgba(0, 153, 255, 0.7);
+                     border: 2px solid rgb(0, 153, 255);
+                     color: rgb(255, 255, 255)" onclick="cadastrar_inventario()">Escolher Pokemons</button>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
-    
+
 </body>
+
 </html>
 
 <script>
     var nome_usuario = sessionStorage.nome
 
 
-    const pokemons = [
-        { value: "pikachu", label: "Pikachu"},
-        { value: "charmander", label: "Charmander" },
-        { value: "bulbasaur", label: "Bulbasaur" },
-        { value: "squirtle", label: "Squirtle" }
-    ];
+    // const pokemons = [
+    //     { value: "serperior", label: "Serperior" },
+    //     { value: "emboar", label: "Emboar" },
+    //     { value: "samurott", label: "Samurott" },
+    //     { value: "watchog", label: "Watchog" },
+    //     { value: "stoutland", label: "Stoutland" },
+    //     { value: "liepard", label: "Liepard" },
+    //     { value: "simisage", label: "Simisage" },
+    //     { value: "simisear", label: "Simisear" },
+    //     { value: "simipour", label: "Simipour" },
+    //     { value: "musharna", label: "Musharna" },
+    //     { value: "unfezant", label: "Unfezant" },
+    //     { value: "zebstrika", label: "Zebstrika" },
+    //     { value: "gigalith", label: "Gigalith" },
+    //     { value: "swoobat", label: "Swoobat" },
+    //     { value: "excadrill", label: "Excadrill" },
+    //     { value: "audino", label: "Audino" },
+    //     { value: "conkeldurr", label: "Conkeldurr" },
+    //     { value: "seismitoad", label: "Seismitoad" },
+    //     { value: "throh", label: "Throh" },
+    //     { value: "sawk", label: "Sawk" },
+    //     { value: "leavanny", label: "Leavanny" },
+    //     { value: "scolipede", label: "Scolipede" },
+    //     { value: "whimsicott", label: "Whimsicott" },
+    //     { value: "lilligant", label: "Lilligant" },
+    //     { value: "basculin", label: "Basculin" },
+    //     { value: "krookodile", label: "Krookodile" },
+    //     { value: "darmanitan", label: "Darmanitan" },
+    //     { value: "maractus", label: "Maractus" },
+    //     { value: "crustle", label: "Crustle" },
+    //     { value: "scrafty", label: "Scrafty" },
+    //     { value: "sigilyph", label: "Sigilyph" },
+    //     { value: "cofagrigus", label: "Cofagrigus" },
+    //     { value: "carracosta", label: "Carracosta" },
+    //     { value: "archeops", label: "Archeops" },
+    //     { value: "garbodor", label: "Garbodor" },
+    //     { value: "zoroark", label: "Zoroark" },
+    //     { value: "cinccino", label: "Cinccino" },
+    //     { value: "gothitelle", label: "Gothitelle" },
+    //     { value: "reuniclus", label: "Reuniclus" },
+    //     { value: "swanna", label: "Swanna" },
+    //     { value: "vanilluxe", label: "Vanilluxe" },
+    //     { value: "sawsbuck", label: "Sawsbuck" },
+    //     { value: "emolga", label: "Emolga" },
+    //     { value: "escavalier", label: "Escavalier" },
+    //     { value: "amoonguss", label: "Amoonguss" },
+    //     { value: "jellicent", label: "Jellicent" },
+    //     { value: "alomomola", label: "Alomomola" },
+    //     { value: "galvantula", label: "Galvantula" },
+    //     { value: "ferrothorn", label: "Ferrothorn" },
+    //     { value: "klinklang", label: "Klinklang" },
+    //     { value: "eelektross", label: "Eelektross" },
+    //     { value: "beheeyem", label: "Beheeyem" },
+    //     { value: "chandelure", label: "Chandelure" },
+    //     { value: "haxorus", label: "Haxorus" },
+    //     { value: "beartic", label: "Beartic" },
+    //     { value: "cryogonal", label: "Cryogonal" },
+    //     { value: "accelgor", label: "Accelgor" },
+    //     { value: "stunfisk", label: "Stunfisk" },
+    //     { value: "mienshao", label: "Mienshao" },
+    //     { value: "druddigon", label: "Druddigon" },
+    //     { value: "golurk", label: "Golurk" },
+    //     { value: "bisharp", label: "Bisharp" },
+    //     { value: "bouffalant", label: "Bouffalant" },
+    //     { value: "braviary", label: "Braviary" },
+    //     { value: "mandibuzz", label: "Mandibuzz" },
+    //     { value: "heatmor", label: "Heatmor" },
+    //     { value: "durant", label: "Durant" },
+    //     { value: "hydreigon", label: "Hydreigon" },
+    //     { value: "volcarona", label: "Volcarona" }
+    // ];
 
-    const optionsHTML = pokemons
-    .map(poke => `<option value="${poke.value}">${poke.label}</option>`)
-    .join('');
+    // const optionsHTML = pokemons
+    //     .map(poke => `<option value="${poke.value}">${poke.label}</option>`)
+    //     .join('');
 
-    const selects = document.querySelectorAll('.container select');
-    selects.forEach(select => {
-    select.innerHTML = optionsHTML;
-    });
-    function f_cadastro(){
+    // const selects = document.querySelectorAll('.container select');
+    // selects.forEach(select => {
+    //     select.innerHTML = optionsHTML;
+    // });
+
+
+    function carregarPokemons() {
+        fetch('http://localhost:8080/pokemon/listar')
+            .then(resposta => resposta.json())
+            .then(pokemons => {
+                const optionsHTML = pokemons
+                    .map(poke => {
+                        const id = poke.idPokemon ?? poke.id_pokemon;
+                        const nome = poke.nomePokemon ?? poke.nome_pokemon;
+                        const nomeFormatado = nome ? nome.toLowerCase() : '';
+                        return `<option value="${id}" data-nome="${nomeFormatado}">${nome}</option>`;
+                    })
+                    .join('');
+
+                const selects = document.querySelectorAll('.container select');
+                selects.forEach(select => {
+                    select.innerHTML = optionsHTML;
+                });
+
+                a_todas_imagens();
+            })
+    }
+
+    function a_imagem(selectElement, imagem_pokemon) {
+        const optionSelecionada = selectElement.options[selectElement.selectedIndex];
+        const nomePokemon = optionSelecionada.getAttribute('data-nome');
+        const imgElement = document.getElementById(imagem_pokemon);
+
+        imgElement.src = `../Assets/pokemons_assets/${nomePokemon}.png`;
+    }
+
+    function a_todas_imagens() {
+        a_imagem(document.getElementById('pokemon1'), 'img_pokemon1');
+        a_imagem(document.getElementById('pokemon2'), 'img_pokemon2');
+        a_imagem(document.getElementById('pokemon3'), 'img_pokemon3');
+    }
+
+
+
+
+    function f_cadastro() {
         div_login.style.display = 'none';
         div_cadastro.style.display = 'flex';
     }
+    function cadastrar() {
+        fetch('http://localhost:8080/treinador/cadastrar', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(
+                {
+                    "nome_treinador": document.getElementById('nome_treinador_cadastro_input').value,
+                    "senha_treinador": document.getElementById('senha_treinador_cadastro_input').value,
+                    "personagem_treinador": document.querySelector('input[name="treinador"]:checked').value,
+                }
+            )
+        }).then(Resposta => {
+            if (Resposta.status == 201) {
+                div_cadastro.style.display = 'none';
+                div_escolha_pokemon.style.display = 'flex';
+                sessionStorage.NOME_TREINADOR = document.getElementById('nome_treinador_cadastro_input').value
+                console.log(sessionStorage.NOME_TREINADOR)
+                console.log("Cadastro realizado com sucesso")
+                puxar_id()
+            } else if (response.status === 409) {
+                alert("Erro: Este nome de treinador já está em uso.");
+            } else if (response.status === 400) {
+                alert("Erro: Dados inválidos. Preencha todos os campos.");
+            } else {
+                alert("Erro: Erro desconhecido")
+            }
+        })
 
-    function f_login(nome_usuario){
-        if (nome_usuario == null){
-            
-        }else{
+    }
+    function cadastrar_inventario() {
+
+        // TODOS OS POKEMONS QUE O CABA VAI PEGAR AAAAAAAAAAAAAAAAAAAAAAAAAAH
+        const pokemon1 = Number(document.getElementById('pokemon1').value);
+        const pokemon2 = Number(document.getElementById('pokemon2').value);
+        const pokemon3 = Number(document.getElementById('pokemon3').value);
+
+
+
+        fetch('http://localhost:8080/Inventario/cadastrar', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "treinador": {
+                    "id_treinador": Number(sessionStorage.ID_TREINADOR)
+                },
+                "id_pokemon": [
+                    { "id_pokemon": pokemon1 },
+                    { "id_pokemon": pokemon2 },
+                    { "id_pokemon": pokemon3 }
+                ]
+            })
+        }).then(Resposta => {
+            if (Resposta.status == 201) {
+                return Resposta.json();
+                console.log("Deu certo")
+                div_escolha_pokemon.style.display = 'none';
+
+                // depois adiciono a tela principal
+            } else if (Resposta.status == 404) {
+                alert("Erro: Não foi conseguido efetuar o cadastro")
+            } else {
+                console.log("Deu errado")
+            }
+        })
+    }
+
+    function puxar_id() {
+        fetch(`http://localhost:8080/treinador/${sessionStorage.NOME_TREINADOR}`, {
+            method: 'GET',
+        }).then(Resposta => Resposta.json())
+            .then(Treinador => {
+                sessionStorage.ID_TREINADOR = Treinador.id_treinador ?? Treinador.idTreinador;
+                if (sessionStorage.ID_TREINADOR == null ?? 'undefined') {
+                    alert("Erro: Não foi possível coletar o id_treinador")
+                }
+            })
+    }
+
+    function f_login(nome_usuario) {
+        if (nome_usuario == null) {
+
+        } else {
 
         }
     }
