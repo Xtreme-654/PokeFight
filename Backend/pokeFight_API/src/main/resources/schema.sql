@@ -44,11 +44,11 @@ CREATE TABLE INVENTARIO (
     FOREIGN KEY (id_pokemon) REFERENCES POKEMON(id_pokemon)
 );
 
-
 CREATE TABLE POKEMON_ATAQUE (
+id_pokemon_ataque INT AUTO_INCREMENT,
     id_pokemon INT NOT NULL,
     id_ataque INT NOT NULL,
-    PRIMARY KEY (id_pokemon, id_ataque),
+    PRIMARY KEY (id_pokemon_ataque, id_pokemon, id_ataque),
     CONSTRAINT fk_pokematq_pokemon FOREIGN KEY (id_pokemon) REFERENCES POKEMON(id_pokemon) ON DELETE CASCADE,
     CONSTRAINT fk_pokematq_ataque FOREIGN KEY (id_ataque) REFERENCES ATAQUE(id_ataque) ON DELETE CASCADE
 );
@@ -123,3 +123,457 @@ VALUES ('Serperior', 'Grass', 'Fire', 75),
  ('Durant', 'Bug', 'Fire', 58),
  ('Hydreigon', 'Dragon', 'Ice', 92),
  ('Volcarona', 'Bug', 'Water', 85);
+
+ INSERT INTO ATAQUE (nome_ataque, tipo_ataque, dano_ataque) VALUES
+ ('Blue Flare', 'Fire', 130),
+ ('Flare Blitz', 'Fire', 120),
+ ('Scald', 'Water', 80),
+ ('Aqua Tail', 'Water', 90),
+ ('Leaf Tornado', 'Grass', 65),
+ ('Energy Ball', 'Grass', 90),
+ ('Bolt Strike', 'Electric', 130),
+ ('Discharge', 'Electric', 80),
+ ('Icicle Crash', 'Ice', 85),
+ ('Avalanche', 'Ice', 60),
+ ('Sacred Sword', 'Fighting', 90),
+ ('Close Combat', 'Fighting', 120),
+ ('Psystrike', 'Psychic', 100),
+ ('Zen Headbutt', 'Psychic', 80),
+ ('Foul Play', 'Dark', 95),
+ ('Night Slash', 'Dark', 70),
+ ('Hex', 'Ghost', 65),
+ ('Shadow Claw', 'Ghost', 70),
+ ('Dragon Tail', 'Dragon', 60),
+ ('Dragon Pulse', 'Dragon', 85),
+ ('Gear Grind', 'Steel', 50),
+ ('Flash Cannon', 'Steel', 80),
+ ('Smack Down', 'Rock', 50),
+ ('Stone Edge', 'Rock', 100),
+ ('Bulldoze', 'Ground', 60),
+ ('Earth Power', 'Ground', 90),
+ ('Steamroller', 'Bug', 65),
+ ('X-Scissor', 'Bug', 80),
+ ('Venoshock', 'Poison', 65),
+ ('Poison Jab', 'Poison', 80),
+ ('Acrobatics', 'Flying', 55),
+ ('Brave Bird', 'Flying', 120),
+ ('Chip Away', 'Normal', 70),
+ ('Giga Impact', 'Normal', 150),
+('Body Slam', 'Normal', 85),
+('Hyper Beam', 'Normal', 150),
+('Double-Edge', 'Normal', 120),
+('Return', 'Normal', 102);
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Serperior'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Serperior'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Leaf Tornado')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Serperior'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Serperior'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emboar'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flare Blitz')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emboar'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Blue Flare')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emboar'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emboar'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Samurott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Samurott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Samurott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Samurott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Watchog'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Chip Away')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Watchog'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Watchog'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Night Slash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Watchog'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stoutland'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Body Slam')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stoutland'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Giga Impact')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stoutland'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stoutland'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Brave Bird'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Liepard'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Foul Play')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Liepard'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Night Slash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Liepard'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Liepard'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Shadow Claw'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisage'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Leaf Tornado')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisage'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisage'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisage'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisear'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flare Blitz')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisear'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Blue Flare')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisear'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simisear'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simipour'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simipour'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simipour'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Simipour'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Musharna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Psystrike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Musharna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Musharna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Musharna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Hex'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Unfezant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Unfezant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Giga Impact')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Unfezant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Brave Bird')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Unfezant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zebstrika'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Discharge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zebstrika'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Bolt Strike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zebstrika'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zebstrika'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gigalith'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gigalith'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Smack Down')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gigalith'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gigalith'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Earth Power'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swoobat'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Psystrike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swoobat'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swoobat'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swoobat'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Excadrill'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Earth Power')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Excadrill'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Bulldoze')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Excadrill'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Excadrill'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Audino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Audino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Body Slam')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Audino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Audino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Psystrike'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Conkeldurr'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Conkeldurr'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Sacred Sword')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Conkeldurr'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Conkeldurr'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Seismitoad'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Seismitoad'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Seismitoad'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Seismitoad'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Earth Power'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Throh'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Throh'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Sacred Sword')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Throh'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Throh'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Body Slam'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Sacred Sword')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Leavanny'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Leavanny'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Leavanny'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Leavanny'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scolipede'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scolipede'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scolipede'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scolipede'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Whimsicott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Leaf Tornado')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Whimsicott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Whimsicott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Whimsicott'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Lilligant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Lilligant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Leaf Tornado')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Lilligant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Lilligant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Basculin'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Basculin'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Basculin'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Basculin'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Double-Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Krookodile'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Earth Power')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Krookodile'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Bulldoze')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Krookodile'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Krookodile'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Darmanitan'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flare Blitz')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Darmanitan'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Blue Flare')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Darmanitan'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Darmanitan'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Double-Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Maractus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Leaf Tornado')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Maractus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Maractus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Maractus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Poison Jab'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Crustle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Crustle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Crustle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Crustle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scrafty'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Foul Play')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scrafty'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Night Slash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scrafty'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Scrafty'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sigilyph'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Psystrike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sigilyph'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sigilyph'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sigilyph'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Shadow Claw'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cofagrigus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Hex')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cofagrigus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Shadow Claw')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cofagrigus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cofagrigus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Carracosta'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Carracosta'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Carracosta'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Carracosta'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Archeops'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Archeops'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Smack Down')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Archeops'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Archeops'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Brave Bird'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Garbodor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Poison Jab')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Garbodor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Venoshock')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Garbodor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Garbodor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Hex'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zoroark'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Foul Play')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zoroark'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Night Slash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zoroark'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Zoroark'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Shadow Claw'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cinccino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Double-Edge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cinccino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cinccino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cinccino'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gothitelle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Psystrike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gothitelle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gothitelle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Gothitelle'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Hex'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Reuniclus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Psystrike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Reuniclus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Reuniclus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Reuniclus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Shadow Claw'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swanna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swanna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swanna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Swanna'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Brave Bird'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Vanilluxe'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Icicle Crash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Vanilluxe'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Avalanche')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Vanilluxe'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Vanilluxe'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawsbuck'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawsbuck'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Double-Edge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawsbuck'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Brave Bird')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Sawsbuck'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emolga'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Discharge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emolga'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Bolt Strike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emolga'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Emolga'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Escavalier'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Escavalier'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Escavalier'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Escavalier'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flash Cannon'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Amoonguss'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Amoonguss'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Leaf Tornado')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Amoonguss'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Amoonguss'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Poison Jab'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Jellicent'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Jellicent'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Jellicent'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Jellicent'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Hex'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Alomomola'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Scald')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Alomomola'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Aqua Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Alomomola'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Alomomola'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Body Slam'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Galvantula'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Galvantula'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Galvantula'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Galvantula'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Discharge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Ferrothorn'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Ferrothorn'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Leaf Tornado')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Ferrothorn'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Ferrothorn'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flash Cannon'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Klinklang'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flash Cannon')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Klinklang'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Gear Grind')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Klinklang'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Klinklang'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Eelektross'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Bolt Strike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Eelektross'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Discharge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Eelektross'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Eelektross'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flash Cannon'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beheeyem'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Psystrike')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beheeyem'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Zen Headbutt')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beheeyem'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beheeyem'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Hex'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Chandelure'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Shadow Claw')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Chandelure'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Hex')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Chandelure'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Chandelure'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Blue Flare'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Haxorus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Dragon Pulse')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Haxorus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Dragon Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Haxorus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Haxorus'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beartic'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Icicle Crash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beartic'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Avalanche')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beartic'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Beartic'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Double-Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cryogonal'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Icicle Crash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cryogonal'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Avalanche')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cryogonal'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Cryogonal'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Accelgor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Accelgor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Accelgor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Accelgor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stunfisk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Bulldoze')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stunfisk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Earth Power')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stunfisk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Stunfisk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mienshao'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mienshao'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Sacred Sword')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mienshao'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mienshao'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Acrobatics'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Druddigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Dragon Pulse')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Druddigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Dragon Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Druddigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Druddigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Golurk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Earth Power')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Golurk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Bulldoze')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Golurk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Golurk'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bisharp'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Foul Play')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bisharp'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Night Slash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bisharp'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bisharp'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bouffalant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Double-Edge')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bouffalant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Giga Impact')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bouffalant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Bouffalant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Close Combat'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Braviary'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Brave Bird')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Braviary'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Giga Impact')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Braviary'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Braviary'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mandibuzz'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Foul Play')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mandibuzz'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Night Slash')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mandibuzz'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Mandibuzz'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Brave Bird'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Heatmor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flare Blitz')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Heatmor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Blue Flare')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Heatmor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Heatmor'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Poison Jab'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Durant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Durant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Durant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Durant'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Stone Edge'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Hydreigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Dragon Pulse')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Hydreigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Dragon Tail')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Hydreigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Hydreigon'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Flash Cannon'));
+
+INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Volcarona'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='X-Scissor')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Volcarona'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Volcarona'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Blue Flare')),
+  ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Volcarona'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return'));

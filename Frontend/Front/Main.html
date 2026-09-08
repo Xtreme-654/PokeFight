@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 
-<body onload="carregarPokemons()">
+<body onload="carregar_Pokemons(), v_logado()">
     <nav class="navbar">
         <div class="container">
             <img src="../Assets/pixel_pokeball.png" alt="">
@@ -80,9 +80,9 @@
                         <p>Terceiro Pokemon</p>
                     </div>
                     <div class="container">
-                        <select name="pokemon1" id="pokemon1" onchange="atualizarImagem(this, 'img_pokemon1')"></select>
-                        <select name="pokemon2" id="pokemon2" onchange="atualizarImagem(this, 'img_pokemon2')"></select>
-                        <select name="pokemon3" id="pokemon3" onchange="atualizarImagem(this, 'img_pokemon3')"></select>
+                        <select name="pokemon1" id="pokemon1" onchange="a_imagem(this, 'img_pokemon1')"></select>
+                        <select name="pokemon2" id="pokemon2" onchange="a_imagem(this, 'img_pokemon2')"></select>
+                        <select name="pokemon3" id="pokemon3" onchange="a_imagem(this, 'img_pokemon3')"></select>
                     </div>
                     <div class="div_imagens_pokemons">
                         <img src="" id="img_pokemon1">
@@ -96,6 +96,113 @@
 
             </div>
 
+            <div class="div_jogo" id="div_jogo">
+                <img src="../Assets/pokefight-logo2.png" alt="">
+                <div class="div_partida">
+                    <div class="display_battle">
+                        <!-- STATUS DA BATALHA FICAM AQUI DENTRO -->
+                        <div class="info_player" style="flex-direction: row;">
+                            <div style="display: flex; flex-direction: column;">
+                                <h2 id="nome_player">---</h2>
+                                <img src="" alt="" id="player_img">
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 100%; margin-left: 20px;">
+                                <h2 style="margin: 0px; border: none;">Resultado ultima partida</h2>
+                                <h2 style="margin: 0px; border: none;" id="resultado">---</h2>
+                                <h2 style="margin: 0px; border: none;" id="data_resultado">---</h2>
+                            </div>
+                        </div>
+
+                        <div class="info_battle">
+
+                            <div class="pokemon_bot">
+                                <div class="pokemon_info" style="align-items: flex-end;">
+                                    <h2 id="nome_pokemon_campo_bot">reshiram</h2>
+                                    <h2 id="vida_pokemon_campo_bot">300/300</h2>
+                                </div>
+                                <img src="../Assets/pokemons_assets/reshiram.png" alt="" id="img_pokemon_campo_bot">
+                            </div>
+
+                            <div class="pokemon_player">
+                                <img src=" " alt="" id="img_pokemon_campo_player">
+                                <div class="pokemon_info">
+                                    <h2 id="nome_pokemon_campo_player">---</h2>
+                                    <h2 id="vida_pokemon_campo_player">0/0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="display_battle_option" id="display_battle_option">
+                        <button onclick="d_ataque()">Ataque</button>
+                        <button onclick="d_pokemon()">Trocar</button>
+                    </div>
+
+
+                    <div class="display_attack" id="display_attack">
+                        <button onclick="d_battle_option()">voltar</button>
+
+                        <div class="card_attack" id="slot_ataque_0" onclick="selecionar_attack(this)">
+                            <h2 id="nome_attack_0">---</h2>
+                            <div class="info_attack">
+                                <h2 id="tipo_attack_0">---</h2>
+                                <h2 id="dano_attack_0">000</h2>
+                            </div>
+                        </div>
+
+                        <div class="card_attack" id="slot_ataque_1" onclick="selecionar_attack(this)">
+                            <h2 id="nome_attack_1">---</h2>
+                            <div class="info_attack">
+                                <h2 id="tipo_attack_1">---</h2>
+                                <h2 id="dano_attack_1">000</h2>
+                            </div>
+                        </div>
+
+                        <div class="card_attack" id="slot_ataque_2" onclick="selecionar_attack(this)">
+                            <h2 id="nome_attack_2">---</h2>
+                            <div class="info_attack">
+                                <h2 id="tipo_attack_2">---</h2>
+                                <h2 id="dano_attack_2">000</h2>
+                            </div>
+                        </div>
+
+                        <div class="card_attack" id="slot_ataque_3" onclick="selecionar_attack(this)">
+                            <h2 id="nome_attack_3">---</h2>
+                            <div class="info_attack">
+                                <h2 id="tipo_attack_3">---</h2>
+                                <h2 id="dano_attack_3">000</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="display_pokemon" id="display_pokemon">
+                        <button onclick="d_battle_option()">voltar</button>
+                        <div class="card_pokemon" id="slot_0 " onclick="selecionar_Pokemon(this)">
+                            <div class="info">
+                                <h2 id="nome_0">---</h2>
+                                <h2 id="vida_0">0/0</h2>
+                            </div>
+                            <img id="img_0" src="" alt="">
+                        </div>
+                        <div class="card_pokemon" id="slot_1" onclick="selecionar_Pokemon(this)">
+                            <div class="info">
+                                <h2 id="nome_1">---</h2>
+                                <h2 id="vida_1">0/0</h2>
+                            </div>
+                            <img id="img_1" src="" alt="">
+                        </div>
+                        <div class="card_pokemon" id="slot_2" onclick="selecionar_Pokemon(this)">
+                            <div class="info">
+                                <h2 id="nome_2">---</h2>
+                                <h2 id="vida_2">0/0</h2>
+                            </div>
+                            <img id="img_2" src="" alt="">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -105,7 +212,6 @@
 </html>
 
 <script>
-    var nome_usuario = sessionStorage.nome
 
 
     // const pokemons = [
@@ -188,47 +294,47 @@
     // selects.forEach(select => {
     //     select.innerHTML = optionsHTML;
     // });
+    function logar() {
+        fetch(`http://localhost:8080/treinador/${document.getElementById('nome_treinador_login_input').value}/${document.getElementById('senha_treinador_login_input').value}`, {
+            method: 'GET'
+        }).then(Resposta => {
+            if (Resposta.status == 200) {
+                return Resposta.json();
+            } else if (Resposta.status == 404) {
+                alert("Erro: Usuário não encontrado.");
+            } else if (Resposta.status == 401) {
+                alert("Erro: Senha incorreta.");
+            } else {
+                alert("Erro: Erro desconhecido");
+            }
+        }).then(Treinador => {
+            if (Treinador) {
+                sessionStorage.NOME_TREINADOR = Treinador.nome_treinador ?? Treinador.nomeTreinador;
+                sessionStorage.PERSONAGEM_TREINADOR = Treinador.personagem_treinador ?? Treinador.personagemTreinador;
+                sessionStorage.ID_TREINADOR = Treinador.id_treinador ?? Treinador.idTreinador;
+                div_login.style.display = 'none';
+                div_jogo.style.display = 'flex';
+                nome_player.innerText = sessionStorage.NOME_TREINADOR;
+                player_img.src = `../Assets/${sessionStorage.PERSONAGEM_TREINADOR}.png`;
+                carregar_Primeiro_Pokemon();
+                carregar_Ultimo_Placar();
 
-
-    function carregarPokemons() {
-        fetch('http://localhost:8080/pokemon/listar')
-            .then(resposta => resposta.json())
-            .then(pokemons => {
-                const optionsHTML = pokemons
-                    .map(poke => {
-                        const id = poke.idPokemon ?? poke.id_pokemon;
-                        const nome = poke.nomePokemon ?? poke.nome_pokemon;
-                        const nomeFormatado = nome ? nome.toLowerCase() : '';
-                        return `<option value="${id}" data-nome="${nomeFormatado}">${nome}</option>`;
-                    })
-                    .join('');
-
-                const selects = document.querySelectorAll('.container select');
-                selects.forEach(select => {
-                    select.innerHTML = optionsHTML;
-                });
-
-                a_todas_imagens();
-            })
+            }
+        });
     }
-
-    function a_imagem(selectElement, imagem_pokemon) {
-        const optionSelecionada = selectElement.options[selectElement.selectedIndex];
-        const nomePokemon = optionSelecionada.getAttribute('data-nome');
-        const imgElement = document.getElementById(imagem_pokemon);
-
-        imgElement.src = `../Assets/pokemons_assets/${nomePokemon}.png`;
+    function v_logado() {
+        if (sessionStorage.NOME_TREINADOR == null || sessionStorage.NOME_TREINADOR == "" ||
+            sessionStorage.ID_TREINADOR == null || sessionStorage.ID_TREINADOR == ""
+        ) {
+            div_login.style.display = 'flex';
+        } else {
+            nome_player.innerText = sessionStorage.NOME_TREINADOR;
+            player_img.src = `../Assets/${sessionStorage.PERSONAGEM_TREINADOR}.png`;
+            carregar_Primeiro_Pokemon();
+            carregar_Ultimo_Placar()
+            div_jogo.style.display = 'flex';
+        }
     }
-
-    function a_todas_imagens() {
-        a_imagem(document.getElementById('pokemon1'), 'img_pokemon1');
-        a_imagem(document.getElementById('pokemon2'), 'img_pokemon2');
-        a_imagem(document.getElementById('pokemon3'), 'img_pokemon3');
-    }
-
-
-
-
     function f_cadastro() {
         div_login.style.display = 'none';
         div_cadastro.style.display = 'flex';
@@ -264,14 +370,45 @@
         })
 
     }
+    function carregar_Pokemons() {
+        fetch('http://localhost:8080/pokemon/listar')
+            .then(resposta => resposta.json())
+            .then(pokemons => {
+                const optionsHTML = pokemons
+                    .map(poke => {
+                        const id = poke.idPokemon ?? poke.id_pokemon;
+                        const nome = poke.nomePokemon ?? poke.nome_pokemon;
+                        const nomeFormatado = nome ? nome.toLowerCase() : '';
+                        return `<option value="${id}" data-nome="${nomeFormatado}">${nome}</option>`;
+                    })
+                    .join('');
+
+                const selects = document.querySelectorAll('.container select');
+                selects.forEach(select => {
+                    select.innerHTML = optionsHTML;
+                });
+
+                a_todas_imagens();
+            })
+    }
+    function a_imagem(selectElement, imagem_pokemon) {
+        const optionSelecionada = selectElement.options[selectElement.selectedIndex];
+        const nomePokemon = optionSelecionada.getAttribute('data-nome');
+        const imgElement = document.getElementById(imagem_pokemon);
+
+        imgElement.src = `../Assets/pokemons_assets/${nomePokemon}.png`;
+    }
+    function a_todas_imagens() {
+        a_imagem(document.getElementById('pokemon1'), 'img_pokemon1');
+        a_imagem(document.getElementById('pokemon2'), 'img_pokemon2');
+        a_imagem(document.getElementById('pokemon3'), 'img_pokemon3');
+    }
     function cadastrar_inventario() {
 
         // TODOS OS POKEMONS QUE O CABA VAI PEGAR AAAAAAAAAAAAAAAAAAAAAAAAAAH
         const pokemon1 = Number(document.getElementById('pokemon1').value);
         const pokemon2 = Number(document.getElementById('pokemon2').value);
         const pokemon3 = Number(document.getElementById('pokemon3').value);
-
-
 
         fetch('http://localhost:8080/Inventario/cadastrar', {
             method: 'POST',
@@ -290,19 +427,18 @@
             })
         }).then(Resposta => {
             if (Resposta.status == 201) {
-                return Resposta.json();
                 console.log("Deu certo")
                 div_escolha_pokemon.style.display = 'none';
-
-                // depois adiciono a tela principal
+                div_login.style.display = 'flex';
+                return Resposta.json();
             } else if (Resposta.status == 404) {
                 alert("Erro: Não foi conseguido efetuar o cadastro")
             } else {
                 console.log("Deu errado")
             }
+            sessionStorage.clear
         })
     }
-
     function puxar_id() {
         fetch(`http://localhost:8080/treinador/${sessionStorage.NOME_TREINADOR}`, {
             method: 'GET',
@@ -314,12 +450,308 @@
                 }
             })
     }
+    // funções de batalha
+    function carregar_Primeiro_Pokemon() {
 
-    function f_login(nome_usuario) {
-        if (nome_usuario == null) {
+        fetch(`http://localhost:8080/Inventario/primeiro/${sessionStorage.ID_TREINADOR}`, {
+            method: 'GET'
+        })
+            .then(Resposta => {
+                if (Resposta.status === 200) {
+                    return Resposta.json();
+                } else if (Resposta.status === 404) {
+                    console.log("Nenhum Pokémon encontrado no inventário deste treinador.");
+                }
+            })
+            .then(pokemon => {
+                sessionStorage.ID_POKEMON_BATALHA = pokemon.id_pokemon;
+                sessionStorage.NOME_POKEMON_BATALHA = pokemon.nome_pokemon;
 
+                const imgPlayer = document.getElementById('img_pokemon_campo_player');
+                const nomePlayer = document.getElementById('nome_pokemon_campo_player');
+                const vidaPlayer = document.getElementById('vida_pokemon_campo_player');
+
+                if (imgPlayer) imgPlayer.src = `../Assets/pokemons_assets/${pokemon.nome_pokemon.toLowerCase()}_back.png`;
+                if (nomePlayer) nomePlayer.innerText = pokemon.nome_pokemon;
+                if (vidaPlayer) vidaPlayer.innerText = `${pokemon.vida_pokemon}/${pokemon.vida_pokemon}`;
+            })
+            .catch(erro => console.error("Erro ao carregar o primeiro Pokémon:", erro));
+    }
+    function d_ataque() {
+        display_battle_option.style.display = "none";
+        display_attack.style.display = "flex";
+        ataques()
+    }
+    function ataques() {
+
+        fetch(`http://localhost:8080/pokemon/ataque/${sessionStorage.ID_POKEMON_BATALHA}`, {
+            method: 'GET',
+        })
+            .then(Resposta => {
+                if (Resposta.status == 404) {
+                    console.log("Erro: Não foi possível encontrar os ataques");
+                    return [];
+                } else if (Resposta.status == 200) {
+                    return Resposta.json();
+                } else {
+                    console.log("Erro: erro de servidor");
+                    return [];
+                }
+            })
+            .then(listaAtaques => {
+                if (!listaAtaques) return;
+
+                for (let i = 0; i < 4; i++) {
+                    const cardElement = document.getElementById(`slot_ataque_${i}`);
+                    const nomeElement = document.getElementById(`nome_attack_${i}`);
+                    const tipoElement = document.getElementById(`tipo_attack_${i}`);
+                    const danoElement = document.getElementById(`dano_attack_${i}`);
+
+                    if (nomeElement) nomeElement.innerText = "---";
+                    if (tipoElement) tipoElement.innerText = "---";
+                    if (danoElement) danoElement.innerText = "000";
+
+                    if (cardElement) {
+                        cardElement.removeAttribute("data-nome");
+                        cardElement.removeAttribute("data-tipo");
+                        cardElement.removeAttribute("data-dano");
+                    }
+                }
+
+                listaAtaques.forEach((ataque, index) => {
+                    if (index < 4) {
+                        const cardElement = document.getElementById(`slot_ataque_${index}`);
+                        const nomeElement = document.getElementById(`nome_attack_${index}`);
+                        const tipoElement = document.getElementById(`tipo_attack_${index}`);
+                        const danoElement = document.getElementById(`dano_attack_${index}`);
+
+                        if (nomeElement) nomeElement.innerText = ataque.nome_ataque;
+                        if (tipoElement) tipoElement.innerText = ataque.tipo_ataque;
+                        if (danoElement) danoElement.innerText = ataque.dano_ataque;
+
+                        if (cardElement) {
+                            cardElement.setAttribute("data-nome", ataque.nome_ataque);
+                            cardElement.setAttribute("data-tipo", ataque.tipo_ataque);
+                            cardElement.setAttribute("data-dano", ataque.dano_ataque);
+                        }
+                    }
+                });
+            })
+            .catch(erro => console.error("Erro ao carregar ataques:", erro));
+    }
+    const VIDA_MAXIMA_BOT = 300;
+    let vidaAtualBot = 300;
+    function selecionar_attack(elementoDiv) {
+        const nomeAtaque = elementoDiv.getAttribute("data-nome");
+        const danoAtaque = parseInt(elementoDiv.getAttribute("data-dano")) || 0;
+
+        if (!nomeAtaque) {
+            console.log("Este slot de ataque está vazio.");
+            return;
+        }
+
+        console.log(`Você atacou com ${nomeAtaque} causando ${danoAtaque} de dano!`);
+
+        vidaAtualBot -= danoAtaque;
+
+        const elementoVidaBot = document.getElementById('vida_pokemon_campo_bot');
+
+        if (vidaAtualBot <= 0) {
+            vidaAtualBot = 0;
+            if (elementoVidaBot) elementoVidaBot.innerText = `${vidaAtualBot}/${VIDA_MAXIMA_BOT}`;
+
+            alert("Você derrotou o oponente!");
+
+            registrar_Placar("Vitória");
+
+            resetar_Bot();
         } else {
-
+            if (elementoVidaBot) elementoVidaBot.innerText = `${vidaAtualBot}/${VIDA_MAXIMA_BOT}`;
         }
     }
+    function resetar_Bot() {
+        vidaAtualBot = VIDA_MAXIMA_BOT;
+        const elementoVidaBot = document.getElementById('vida_pokemon_campo_bot');
+        if (elementoVidaBot) {
+            elementoVidaBot.innerText = `${vidaAtualBot}/${VIDA_MAXIMA_BOT}`;
+        }
+    }
+    function registrar_Placar(resultado_Batalha) {
+        const dataHoraAtual = new Date().toISOString().slice(0, 19);
+        fetch('http://localhost:8080/treinador/placar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    "resultado": resultado_Batalha,
+                    "data_hora": dataHoraAtual,
+                    "treinador": {
+                        "id_treinador": parseInt(sessionStorage.ID_TREINADOR)
+                    }
+                }
+            )
+        })
+            .then(resposta => {
+                if (resposta.status === 201) {
+                    return resposta.json();
+                } else {
+                    console.error("Erro ao registrar o placar. Status:", resposta.status);
+                }
+            })
+            .then(dados => {
+                if (dados) {
+                    console.log("Placar gravado com sucesso:", dados);
+                    carregar_Ultimo_Placar();
+                }
+            })
+            .catch(erro => console.error("Erro na chamada de registro de placar:", erro));
+    }
+    function d_pokemon() {
+        display_battle_option.style.display = "none";
+        display_pokemon.style.display = "flex";
+        inventario();
+
+    }
+    function d_battle_option() {
+        display_attack.style.display = "none"
+        display_pokemon.style.display = "none"
+        display_battle_option.style.display = "flex"
+    }
+    function inventario() {
+        fetch(`http://localhost:8080/Inventario/${sessionStorage.ID_TREINADOR}`, {
+            method: 'GET',
+        })
+            .then(Resposta => {
+                if (Resposta.status == 404) {
+                    console.log("Erro: não foi possível achar a requisição");
+                } else if (Resposta.status == 200) {
+                    return Resposta.json();
+                } else {
+                    console.log("Erro: erro de servidor");
+                }
+            })
+            .then(data => {
+                if (!data || data.length === 0) return;
+
+                const listaPokemons = data[0].id_pokemon ? data[0].id_pokemon : data;
+
+                for (let i = 0; i < 3; i++) {
+                    const imgElement = document.getElementById(`img_${i}`);
+                    const nomeElement = document.getElementById(`nome_${i}`);
+                    const vidaElement = document.getElementById(`vida_${i}`);
+
+                    if (imgElement) {
+                        imgElement.src = "";
+                        imgElement.alt = "";
+                        imgElement.removeAttribute("data-id");
+                    }
+                    if (nomeElement) nomeElement.innerText = "---";
+                    if (vidaElement) vidaElement.innerText = "0/0";
+                }
+
+                listaPokemons.forEach((pokemon, index) => {
+                    if (index < 3) {
+                        const imgElement = document.getElementById(`img_${index}`);
+                        const nomeElement = document.getElementById(`nome_${index}`);
+                        const vidaElement = document.getElementById(`vida_${index}`);
+
+                        if (pokemon.nome_pokemon) {
+                            if (imgElement) {
+                                imgElement.src = `../Assets/pokemons_assets/${pokemon.nome_pokemon.toLowerCase()}.png`;
+                                imgElement.alt = pokemon.nome_pokemon;
+                                imgElement.setAttribute("data-id", pokemon.id_pokemon);
+                                imgElement.setAttribute("data-nome", pokemon.nome_pokemon);
+                                imgElement.setAttribute("data-tipo", pokemon.tipo_pokemon);
+                                imgElement.setAttribute("data-vida", pokemon.vida_pokemon);
+                                imgElement.setAttribute("data-fraqueza", pokemon.fraqueza_pokemon);
+                            }
+
+                            if (nomeElement) {
+                                nomeElement.innerText = pokemon.nome_pokemon;
+                            }
+                            if (vidaElement) {
+                                vidaElement.innerText = `${pokemon.vida_pokemon}/${pokemon.vida_pokemon}`;
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(erro => console.error("Erro ao carregar inventário:", erro));
+    }
+    function selecionar_Pokemon(elementoDiv) {
+        const imgElement = elementoDiv.querySelector("img");
+
+        const idPokemon = imgElement.getAttribute("data-id");
+        const nomePokemon = imgElement.getAttribute("data-nome");
+        const vidaPokemon = imgElement.getAttribute("data-vida");
+
+        if (!idPokemon) {
+            alert("Nenhum Pokémon cadastrado neste slot!");
+            return;
+        }
+
+        sessionStorage.ID_POKEMON_BATALHA = idPokemon;
+        sessionStorage.NOME_POKEMON_BATALHA = nomePokemon;
+
+        d_battle_option()
+        console.log(`Pokémon selecionado para a batalha: ${nomePokemon} (ID: ${idPokemon})`);
+
+        const imgPlayer = document.getElementById('img_pokemon_campo_player');
+        const nomePlayer = document.getElementById('nome_pokemon_campo_player');
+        const vidaPlayer = document.getElementById('vida_pokemon_campo_player');
+
+        if (imgPlayer) {
+            imgPlayer.src = `../Assets/pokemons_assets/${nomePokemon.toLowerCase()}_back.png`;
+        }
+
+        if (nomePlayer) nomePlayer.innerText = nomePokemon;
+
+        if (vidaPlayer) vidaPlayer.innerText = `${vidaPokemon}/${vidaPokemon}`;
+    }
+    function carregar_Ultimo_Placar() {
+    fetch(`http://localhost:8080/treinador/verUltimoPlacar/${sessionStorage.ID_TREINADOR}`, {
+        method: 'GET'
+    })
+    .then(resposta => {
+        if (resposta.status === 200) {
+            return resposta.json();
+        } else {
+            return null;
+        }
+    })
+    .then(dados => {
+        const elementoResultado = document.getElementById("resultado");
+        const elementoData = document.getElementById("data_resultado");
+
+        if (dados && dados.resultado) {
+            if (elementoResultado) {
+                elementoResultado.innerText = dados.resultado;
+            }
+
+            if (elementoData && dados.data_hora) {
+                const dataObj = new Date(dados.data_hora);
+                const dataFormatada = dataObj.toLocaleString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                elementoData.innerText = dataFormatada;
+            }
+        } else {
+            if (elementoResultado) elementoResultado.innerText = "---";
+            if (elementoData) elementoData.innerText = "---";
+        }
+    })
+    .catch(erro => {
+        console.error("Erro ao buscar o último placar:", erro);
+        const elementoResultado = document.getElementById("resultado");
+        const elementoData = document.getElementById("data_resultado");
+        if (elementoResultado) elementoResultado.innerText = "---";
+        if (elementoData) elementoData.innerText = "---";
+    });
+}
 </script>

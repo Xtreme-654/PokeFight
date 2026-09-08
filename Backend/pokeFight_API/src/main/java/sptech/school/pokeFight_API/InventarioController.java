@@ -1,7 +1,9 @@
 package sptech.school.pokeFight_API;
 
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Inventario")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class InventarioController {
 
     private final JdbcTemplate jdbcTemplate;
@@ -61,7 +63,57 @@ public class InventarioController {
 
         return ResponseEntity.status(201).body(lista_inventario);
     }
+    @GetMapping("/{id_treinador}")
+    public ResponseEntity<List<Inventario>> listar_inventario(@PathVariable("id_treinador") Integer id) {
+        String sql = "SELECT p.id_pokemon, p.nome_pokemon, p.tipo_pokemon, p.vida_pokemon, p.fraqueza_pokemon " +
+                "FROM INVENTARIO i " +
+                "JOIN POKEMON p ON i.id_pokemon = p.id_pokemon " +
+                "JOIN TREINADOR t ON i.id_treinador = t.id_treinador " +
+                "WHERE t.id_treinador = ?;";
+        try {
+            List<Pokemon> pokemons = jdbcTemplate.query(sql, (rs, rowNum) -> {
+                Pokemon p = new Pokemon();
+                p.setId_pokemon(rs.getInt("id_pokemon"));
+                p.setNome_pokemon(rs.getString("nome_pokemon"));
+                p.setTipo_pokemon(rs.getString("tipo_pokemon"));
+                p.setVida_pokemon(rs.getInt("vida_pokemon"));
+                p.setFraqueza_pokemon(rs.getString("fraqueza_pokemon"));
+                return p;
+            }, id);
 
+            if (pokemons.isEmpty()) {
+                return ResponseEntity.status(404).build();
+            }
+
+            Inventario inventario = new Inventario();
+            inventario.setId_pokemon(pokemons);
+
+            return ResponseEntity.status(200).body(List.of(inventario));
+
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).build();
+        }
+    }
+
+    @GetMapping("/primeiro/{id_treinador}")
+    public ResponseEntity<Pokemon> primeiro_pokemon(@PathVariable("id_treinador") Integer id) {
+        String sql = "SELECT p.id_pokemon, p.nome_pokemon, p.tipo_pokemon, p.vida_pokemon, p.fraqueza_pokemon " +
+                "FROM INVENTARIO i " +
+                "JOIN POKEMON p ON i.id_pokemon = p.id_pokemon " +
+                "WHERE i.id_treinador = ? " +
+                "ORDER BY i.id_inventario ASC LIMIT 1;";
+        try {
+            Pokemon primeiroPokemon = jdbcTemplate.queryForObject(
+                    sql,
+                    new BeanPropertyRowMapper<>(Pokemon.class),
+                    id
+            );
+            return ResponseEntity.status(200).body(primeiroPokemon);
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.status(404).build();
+        }
+    }
 
     public Boolean ExisteId(Integer id_treinador){
         String sqlExiste = "SELECT COUNT(*) FROM TREINADOR WHERE id_treinador = ?;";

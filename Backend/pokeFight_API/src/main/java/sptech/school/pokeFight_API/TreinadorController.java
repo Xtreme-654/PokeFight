@@ -1,7 +1,6 @@
 package sptech.school.pokeFight_API;
 
 import org.jspecify.annotations.NonNull;
-import org.springframework.aop.support.DelegatingIntroductionInterceptor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 @RequestMapping("/treinador")
@@ -69,6 +70,71 @@ public class TreinadorController {
         }
     }
 
+    @GetMapping("/{nome_treinador}/{senha_treinador}")
+    public ResponseEntity<Treinador> login(@PathVariable("nome_treinador") String nome, @PathVariable("senha_treinador") String senha){
+
+        String sql = "SELECT * FROM TREINADOR WHERE nome_treinador = ? AND senha_treinador = ?;";
+
+        if (!existeNome(nome)){
+            return ResponseEntity.status(404).build();
+        }else{
+            try {
+                Treinador treinador = jdbcTemplate.queryForObject(sql,
+                        new BeanPropertyRowMapper<>(Treinador.class),
+                        nome, senha);
+                return ResponseEntity.status(200).body(treinador);
+            }catch (EmptyResultDataAccessException e){
+                e.printStackTrace();
+                return ResponseEntity.status(401).build();
+            }
+        }
+    }
+
+    @PostMapping("/placar")
+    public ResponseEntity<Placar> resultado(@RequestBody Placar placarCriar){
+        String sql = "INSERT INTO PLACAR (resultado, data_hora, id_treinador) VALUES (?,?,?);";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1,placarCriar.getResultado());
+            ps.setTimestamp(2, Timestamp.valueOf(placarCriar.getData_hora()));
+            ps.setInt(3,placarCriar.getTreinador().getId_treinador());
+
+            return ps;
+        }, keyHolder);
+        Integer idGerado = keyHolder.getKeyAs(Integer.class);
+        placarCriar.setId_placar(idGerado);
+        return ResponseEntity.status(201).body(placarCriar);
+    }
+    @GetMapping("/verUltimoPlacar/{id_treinador}")
+    public ResponseEntity<Placar> ultimoPlacar(@PathVariable("id_treinador") Integer id){
+        String sql = "SELECT resultado, data_hora FROM PLACAR WHERE id_treinador = ? ORDER BY data_hora DESC LIMIT 1;";
+
+        try {
+            List<Placar> placares = jdbcTemplate.query(sql, (rs, rowNum) -> {
+                Placar p = new Placar();
+                p.setResultado(rs.getString("resultado"));
+
+                Timestamp timestamp = rs.getTimestamp("data_hora");
+                if (timestamp != null) {
+                    p.setData_hora(timestamp.toLocalDateTime());
+                }
+
+                return p;
+            }, id);
+            if (placares.isEmpty()) {
+                return ResponseEntity.status(404).build();
+            }
+
+            return ResponseEntity.status(200).body(placares.get(0));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
+    }
     private @NonNull Boolean existeNome(String nome_treinador){
         String sqlExiste = "SELECT COUNT(*) FROM TREINADOR WHERE LOWER(nome_treinador) = LOWER(?);";
         Integer count = jdbcTemplate.queryForObject(sqlExiste, Integer.class ,nome_treinador);

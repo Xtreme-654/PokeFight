@@ -1,12 +1,10 @@
 package sptech.school.pokeFight_API;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,4 +29,20 @@ public class PokemonController {
         return ResponseEntity.status(200).body(pokemons);
     }
 
+    @GetMapping("/ataque/{id_pokemon}")
+    public ResponseEntity<List<Ataque>> listarAtaques(@PathVariable("id_pokemon") Integer id){
+        String sql = "SELECT a.nome_ataque, a.tipo_ataque, a.dano_ataque FROM POKEMON_ATAQUE pa " +
+                "JOIN ATAQUE a ON pa.id_ataque = a.id_ataque " +
+                "JOIN POKEMON p ON pa.id_pokemon = p.id_pokemon " +
+                "WHERE p.id_pokemon = ?;";
+        try {
+            List<Ataque> ataques = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Ataque.class),
+            id);
+            return ResponseEntity.status(200).body(ataques);
+        }catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).build();
+        }
+    }
 }

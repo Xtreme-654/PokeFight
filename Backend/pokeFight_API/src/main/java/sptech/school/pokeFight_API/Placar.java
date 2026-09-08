@@ -4,15 +4,13 @@ import java.time.LocalDateTime;
 
 public class Placar {
     private Integer id_placar;
-    private Integer vitorias;
-    private Integer derrotas;
+    private String resultado;
     private java.time.LocalDateTime data_hora;
     private Treinador treinador; // relação 1:N
 
-    public Placar(Integer id_placar, Integer vitorias, Integer derrotas, LocalDateTime data_hora, Treinador treinador) {
+    public Placar(Integer id_placar, String resultado, LocalDateTime data_hora, Treinador treinador) {
         this.id_placar = id_placar;
-        this.vitorias = vitorias;
-        this.derrotas = derrotas;
+        this.resultado = resultado;
         this.data_hora = data_hora;
         this.treinador = treinador;
     }
@@ -28,20 +26,12 @@ public class Placar {
         this.id_placar = id_placar;
     }
 
-    public Integer getVitorias() {
-        return vitorias;
+    public String getResultado() {
+        return resultado;
     }
 
-    public void setVitorias(Integer vitorias) {
-        this.vitorias = vitorias;
-    }
-
-    public Integer getDerrotas() {
-        return derrotas;
-    }
-
-    public void setDerrotas(Integer derrotas) {
-        this.derrotas = derrotas;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
     public LocalDateTime getData_hora() {
