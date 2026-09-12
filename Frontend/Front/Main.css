@@ -329,12 +329,16 @@ height: 65%;
 
 .pokemon_info{
     display: flex;
-    background-color: aliceblue;
+    background-color: rgb(250, 248, 220);
+    border: 3px solid #283e2e;
+    padding: 10px;
+    position: relative;
     width: 40%;
     height: 60%;
     margin-bottom: 20px;
     flex-direction: column;
     justify-content: center;
+    
 }
 .pokemon_info h2{
     margin: 0px;
@@ -347,8 +351,23 @@ height: 65%;
 .display_battle_option  {
     width: 1020px;
     display: flex;
-    background-color: aliceblue;
     height: 8%;
+}
+.button_ataque{
+    font-family: 'Pixelify Sans', sans-serif;
+    background-color: red;
+    font-size: 28px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.button_trocar{
+    font-family: 'Pixelify Sans', sans-serif;
+    background-color: green;
+    font-size: 28px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
 }
 .display_battle_option   button{
     width: 50%;

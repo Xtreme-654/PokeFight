@@ -1,0 +1,8 @@
+O PokéFight é uma aplicação web de simulação de batalhas Pokémon por turnos (turn-based), desenvolvida sob uma arquitetura desacoplada onde a interface do usuário consome dados de uma API REST em Java (Spring Boot).
+
+Visão Geral do Projeto
+
+ Simulação de Combate por Turnos: O jogador enfrenta um oponente em campo, podendo aplicar ataques com diferentes valores de dano ou alternar entre os Pokémons do seu time.
+ Comunicação via API REST: Toda a lógica de negócio, autenticação e gerenciamento de estado acontecem no backend. O frontend realiza requisições HTTP (enviando e recebendo JSON) para buscar inventários, listar ataques disponíveis, calcular a vida restante e atualizar a tela em tempo real.
+ Gerenciamento de Treinadores e Inventário: O sistema permite cadastrar novos treinadores, associar seus avatares e salvar um time fixo de 3 Pokémons no banco de dados.
+ Persistência de Placares: Ao finalizar um confronto, o resultado (Vitória/Derrota) e a data/hora da partida são enviados à API e salvos no banco de dados, permitindo consultar o histórico do último placar do jogador a qualquer momento.

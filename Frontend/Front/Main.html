@@ -134,13 +134,15 @@
                         </div>
                     </div>
                     <div class="display_battle_option" id="display_battle_option">
-                        <button onclick="d_ataque()">Ataque</button>
-                        <button onclick="d_pokemon()">Trocar</button>
+                        <button class="button_ataque" onclick="d_ataque()">Ataque</button>
+                        <button class="button_trocar" onclick="d_pokemon()">Trocar</button>
                     </div>
 
 
                     <div class="display_attack" id="display_attack">
-                        <button onclick="d_battle_option()">voltar</button>
+                        <button onclick="d_battle_option()">
+                            <img style="width: 40px; height: 40px;" src="../Assets/return.png" alt="">
+                        </button>
 
                         <div class="card_attack" id="slot_ataque_0" onclick="selecionar_attack(this)">
                             <h2 id="nome_attack_0">---</h2>
@@ -175,7 +177,9 @@
                         </div>
                     </div>
                     <div class="display_pokemon" id="display_pokemon">
-                        <button onclick="d_battle_option()">voltar</button>
+                        <button onclick="d_battle_option()">
+                            <img style="width: 40px; height: 40px;" src="../Assets/return.png" alt="">
+                        </button>
                         <div class="card_pokemon" id="slot_0 " onclick="selecionar_Pokemon(this)">
                             <div class="info">
                                 <h2 id="nome_0">---</h2>
