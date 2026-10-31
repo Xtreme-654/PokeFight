@@ -8,6 +8,7 @@ CREATE TABLE TREINADOR (
 CREATE TABLE POKEMON (
     id_pokemon INT AUTO_INCREMENT PRIMARY KEY,
     nome_pokemon VARCHAR(255) NOT NULL,
+    numero_pokedex INT UNIQUE,
     tipo_pokemon VARCHAR(100) NOT NULL,
     vida_pokemon INT NOT NULL,
     fraqueza_pokemon VARCHAR(100) NOT NULL
@@ -577,3 +578,96 @@ INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
   ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Volcarona'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Steamroller')),
   ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Volcarona'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Blue Flare')),
   ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Volcarona'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Return'));
+
+
+-- PokePath: equipe ordenada, golpes equipados e estado persistido das batalhas.
+-- Os números da Pokédex são atribuídos por nome, nunca pelo ID interno do banco.
+UPDATE POKEMON SET numero_pokedex = CASE nome_pokemon
+ WHEN 'Serperior' THEN 497 WHEN 'Emboar' THEN 500 WHEN 'Samurott' THEN 503
+ WHEN 'Watchog' THEN 505 WHEN 'Stoutland' THEN 508 WHEN 'Liepard' THEN 510
+ WHEN 'Simisage' THEN 512 WHEN 'Simisear' THEN 514 WHEN 'Simipour' THEN 516
+ WHEN 'Musharna' THEN 518 WHEN 'Unfezant' THEN 521 WHEN 'Zebstrika' THEN 523
+ WHEN 'Gigalith' THEN 526 WHEN 'Swoobat' THEN 528 WHEN 'Excadrill' THEN 530
+ WHEN 'Audino' THEN 531 WHEN 'Conkeldurr' THEN 534 WHEN 'Seismitoad' THEN 537
+ WHEN 'Throh' THEN 538 WHEN 'Sawk' THEN 539 WHEN 'Leavanny' THEN 542
+ WHEN 'Scolipede' THEN 545 WHEN 'Whimsicott' THEN 547 WHEN 'Lilligant' THEN 549
+ WHEN 'Basculin' THEN 550 WHEN 'Krookodile' THEN 553 WHEN 'Darmanitan' THEN 555
+ WHEN 'Maractus' THEN 556 WHEN 'Crustle' THEN 558 WHEN 'Scrafty' THEN 560
+ WHEN 'Sigilyph' THEN 561 WHEN 'Cofagrigus' THEN 563 WHEN 'Carracosta' THEN 565
+ WHEN 'Archeops' THEN 567 WHEN 'Garbodor' THEN 569 WHEN 'Zoroark' THEN 571
+ WHEN 'Cinccino' THEN 573 WHEN 'Gothitelle' THEN 576 WHEN 'Reuniclus' THEN 579
+ WHEN 'Swanna' THEN 581 WHEN 'Vanilluxe' THEN 584 WHEN 'Sawsbuck' THEN 586
+ WHEN 'Emolga' THEN 587 WHEN 'Escavalier' THEN 589 WHEN 'Amoonguss' THEN 591
+ WHEN 'Jellicent' THEN 593 WHEN 'Alomomola' THEN 594 WHEN 'Galvantula' THEN 596
+ WHEN 'Ferrothorn' THEN 598 WHEN 'Klinklang' THEN 601 WHEN 'Eelektross' THEN 604
+ WHEN 'Beheeyem' THEN 606 WHEN 'Chandelure' THEN 609 WHEN 'Haxorus' THEN 612
+ WHEN 'Beartic' THEN 614 WHEN 'Cryogonal' THEN 615 WHEN 'Accelgor' THEN 617
+ WHEN 'Stunfisk' THEN 618 WHEN 'Mienshao' THEN 620 WHEN 'Druddigon' THEN 621
+ WHEN 'Golurk' THEN 623 WHEN 'Bisharp' THEN 625 WHEN 'Bouffalant' THEN 626
+ WHEN 'Braviary' THEN 628 WHEN 'Mandibuzz' THEN 630 WHEN 'Heatmor' THEN 631
+ WHEN 'Durant' THEN 632 WHEN 'Hydreigon' THEN 635 WHEN 'Volcarona' THEN 637
+ ELSE NULL END;
+
+CREATE TABLE EQUIPE_TREINADOR (
+    id_equipe INT AUTO_INCREMENT PRIMARY KEY,
+    id_treinador INT NOT NULL,
+    id_pokemon INT NOT NULL,
+    posicao INT NOT NULL,
+    CONSTRAINT uq_equipe_posicao UNIQUE (id_treinador, posicao),
+    CONSTRAINT ck_equipe_posicao CHECK (posicao BETWEEN 1 AND 6),
+    CONSTRAINT fk_equipe_treinador FOREIGN KEY (id_treinador) REFERENCES TREINADOR(id_treinador) ON DELETE CASCADE,
+    CONSTRAINT fk_equipe_pokemon FOREIGN KEY (id_pokemon) REFERENCES POKEMON(id_pokemon)
+);
+
+CREATE TABLE EQUIPE_POKEMON_ATAQUE (
+    id_equipe INT NOT NULL,
+    id_ataque INT NOT NULL,
+    slot_ataque INT NOT NULL,
+    PRIMARY KEY (id_equipe, slot_ataque),
+    CONSTRAINT ck_slot_ataque CHECK (slot_ataque BETWEEN 1 AND 4),
+    CONSTRAINT fk_epa_equipe FOREIGN KEY (id_equipe) REFERENCES EQUIPE_TREINADOR(id_equipe) ON DELETE CASCADE,
+    CONSTRAINT fk_epa_ataque FOREIGN KEY (id_ataque) REFERENCES ATAQUE(id_ataque)
+);
+
+CREATE TABLE BATALHA (
+    id_batalha BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_treinador INT NOT NULL,
+    nome_bot VARCHAR(100) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'EM_ANDAMENTO',
+    turno_atual INT NOT NULL DEFAULT 1,
+    resultado VARCHAR(20),
+    iniciada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    finalizada_em TIMESTAMP,
+    CONSTRAINT ck_batalha_status CHECK (status IN ('EM_ANDAMENTO','VITORIA','DERROTA','CANCELADA')) ,
+    CONSTRAINT fk_batalha_treinador FOREIGN KEY (id_treinador) REFERENCES TREINADOR(id_treinador) ON DELETE CASCADE
+);
+
+CREATE TABLE BATALHA_POKEMON (
+    id_batalha BIGINT NOT NULL,
+    lado VARCHAR(10) NOT NULL,
+    posicao INT NOT NULL,
+    id_pokemon INT NOT NULL,
+    hp_atual INT NOT NULL,
+    ativo BOOLEAN NOT NULL DEFAULT FALSE,
+    derrotado BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (id_batalha, lado, posicao),
+    CONSTRAINT ck_bp_lado CHECK (lado IN ('JOGADOR','BOT')),
+    CONSTRAINT ck_bp_posicao CHECK (posicao BETWEEN 1 AND 6),
+    CONSTRAINT ck_bp_hp CHECK (hp_atual >= 0),
+    CONSTRAINT fk_bp_batalha FOREIGN KEY (id_batalha) REFERENCES BATALHA(id_batalha) ON DELETE CASCADE,
+    CONSTRAINT fk_bp_pokemon FOREIGN KEY (id_pokemon) REFERENCES POKEMON(id_pokemon)
+);
+
+CREATE TABLE BATALHA_LOG (
+    id_log BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_batalha BIGINT NOT NULL,
+    turno INT NOT NULL,
+    ordem_evento INT NOT NULL,
+    mensagem VARCHAR(500) NOT NULL,
+    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_log_batalha FOREIGN KEY (id_batalha) REFERENCES BATALHA(id_batalha) ON DELETE CASCADE
+);
+
+
+INSERT INTO TREINADOR (nome_treinador, senha_treinador, personagem_treinador) VALUES
+('xtreme-dosamba', 'pinto123', 'men_trainer1')
