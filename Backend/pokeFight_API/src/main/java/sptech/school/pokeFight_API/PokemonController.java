@@ -31,7 +31,7 @@ public class PokemonController {
 
     @GetMapping("/ataque/{id_pokemon}")
     public ResponseEntity<List<Ataque>> listarAtaques(@PathVariable("id_pokemon") Integer id){
-        String sql = "SELECT a.nome_ataque, a.tipo_ataque, a.dano_ataque FROM POKEMON_ATAQUE pa " +
+        String sql = "SELECT a.id_ataque, a.nome_ataque, a.tipo_ataque, a.dano_ataque FROM POKEMON_ATAQUE pa " +
                 "JOIN ATAQUE a ON pa.id_ataque = a.id_ataque " +
                 "JOIN POKEMON p ON pa.id_pokemon = p.id_pokemon " +
                 "WHERE p.id_pokemon = ?;";
