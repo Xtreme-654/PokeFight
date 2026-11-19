@@ -65,7 +65,7 @@ public class InventarioController {
     }
     @GetMapping("/{id_treinador}")
     public ResponseEntity<List<Inventario>> listar_inventario(@PathVariable("id_treinador") Integer id) {
-        String sql = "SELECT p.id_pokemon, p.nome_pokemon, p.tipo_pokemon, p.vida_pokemon, p.fraqueza_pokemon " +
+        String sql = "SELECT p.id_pokemon, p.nome_pokemon, p.tipo_pokemon, p.tipo_secundario, p.vida_pokemon, p.fraqueza_pokemon " +
                 "FROM INVENTARIO i " +
                 "JOIN POKEMON p ON i.id_pokemon = p.id_pokemon " +
                 "JOIN TREINADOR t ON i.id_treinador = t.id_treinador " +
@@ -76,6 +76,7 @@ public class InventarioController {
                 p.setId_pokemon(rs.getInt("id_pokemon"));
                 p.setNome_pokemon(rs.getString("nome_pokemon"));
                 p.setTipo_pokemon(rs.getString("tipo_pokemon"));
+                p.setTipo_secundario(rs.getString("tipo_secundario"));
                 p.setVida_pokemon(rs.getInt("vida_pokemon"));
                 p.setFraqueza_pokemon(rs.getString("fraqueza_pokemon"));
                 return p;
@@ -98,7 +99,7 @@ public class InventarioController {
 
     @GetMapping("/primeiro/{id_treinador}")
     public ResponseEntity<Pokemon> primeiro_pokemon(@PathVariable("id_treinador") Integer id) {
-        String sql = "SELECT p.id_pokemon, p.nome_pokemon, p.tipo_pokemon, p.vida_pokemon, p.fraqueza_pokemon " +
+        String sql = "SELECT p.id_pokemon, p.nome_pokemon, p.tipo_pokemon, p.tipo_secundario, p.vida_pokemon, p.fraqueza_pokemon " +
                 "FROM INVENTARIO i " +
                 "JOIN POKEMON p ON i.id_pokemon = p.id_pokemon " +
                 "WHERE i.id_treinador = ? " +

@@ -22,7 +22,7 @@ public class PokemonController {
 
     @GetMapping("/listar")
     public ResponseEntity<List<Pokemon>> listarPokemon(){
-        String sql = "SELECT id_pokemon AS id_pokemon, nome_pokemon AS nome_pokemon FROM POKEMON;";
+        String sql = "SELECT id_pokemon, nome_pokemon, numero_pokedex, tipo_pokemon, tipo_secundario, vida_pokemon, fraqueza_pokemon FROM POKEMON ORDER BY numero_pokedex;";
 
         List<Pokemon> pokemons = jdbcTemplate.query(sql,
                 new BeanPropertyRowMapper<>(Pokemon.class));

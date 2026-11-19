@@ -6,6 +6,8 @@ public class Pokemon {
     private Integer id_pokemon;
     private String nome_pokemon;
     private String tipo_pokemon;
+    private String tipo_secundario;
+    private Integer numero_pokedex;
     private Integer vida_pokemon;
     private String fraqueza_pokemon;
     private List<Treinador> treinadores; // N:N
@@ -48,6 +50,14 @@ public class Pokemon {
     public void setTipo_pokemon(String tipo_pokemon) {
         this.tipo_pokemon = tipo_pokemon;
     }
+
+    public Integer getNumero_pokedex() { return numero_pokedex; }
+
+    public void setNumero_pokedex(Integer numero_pokedex) { this.numero_pokedex = numero_pokedex; }
+
+    public String getTipo_secundario() { return tipo_secundario; }
+
+    public void setTipo_secundario(String tipo_secundario) { this.tipo_secundario = tipo_secundario; }
 
     public Integer getVida_pokemon() {
         return vida_pokemon;

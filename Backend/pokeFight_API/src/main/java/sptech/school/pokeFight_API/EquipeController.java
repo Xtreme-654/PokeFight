@@ -19,7 +19,7 @@ public class EquipeController {
     public ResponseEntity<?> listar(@RequestParam Integer treinadorId) {
         if (!treinadorExiste(treinadorId)) return ResponseEntity.notFound().build();
         List<Map<String,Object>> equipe = jdbc.queryForList(
-            "SELECT e.posicao, p.id_pokemon AS idPokemon, p.nome_pokemon AS nome, p.numero_pokedex AS numeroPokedex, p.tipo_pokemon AS tipo, p.vida_pokemon AS hpMaximo " +
+            "SELECT e.posicao, p.id_pokemon AS idPokemon, p.nome_pokemon AS nome, p.numero_pokedex AS numeroPokedex, p.tipo_pokemon AS tipo, p.tipo_secundario AS tipoSecundario, p.vida_pokemon AS hpMaximo " +
             "FROM EQUIPE_TREINADOR e JOIN POKEMON p ON p.id_pokemon=e.id_pokemon WHERE e.id_treinador=? ORDER BY e.posicao", treinadorId);
         for (Map<String,Object> item : equipe) {
             List<Map<String,Object>> golpes = jdbc.queryForList(

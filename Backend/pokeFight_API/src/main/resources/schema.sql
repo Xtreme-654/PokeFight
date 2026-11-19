@@ -10,6 +10,7 @@ CREATE TABLE POKEMON (
     nome_pokemon VARCHAR(255) NOT NULL,
     numero_pokedex INT UNIQUE,
     tipo_pokemon VARCHAR(100) NOT NULL,
+    tipo_secundario VARCHAR(100),
     vida_pokemon INT NOT NULL,
     fraqueza_pokemon VARCHAR(100) NOT NULL
 );
@@ -125,6 +126,24 @@ VALUES ('Serperior', 'Grass', 'Fire', 75),
  ('Hydreigon', 'Dragon', 'Ice', 92),
  ('Volcarona', 'Bug', 'Water', 85);
 
+
+-- Tipagem secundária oficial dos Pokémon da Pokédex de Unova.
+UPDATE POKEMON SET tipo_secundario = CASE nome_pokemon
+ WHEN 'Emboar' THEN 'Fighting' WHEN 'Unfezant' THEN 'Flying' WHEN 'Swoobat' THEN 'Flying'
+ WHEN 'Excadrill' THEN 'Steel' WHEN 'Seismitoad' THEN 'Ground' WHEN 'Leavanny' THEN 'Grass'
+ WHEN 'Scolipede' THEN 'Poison' WHEN 'Krookodile' THEN 'Dark' WHEN 'Crustle' THEN 'Rock'
+ WHEN 'Scrafty' THEN 'Fighting' WHEN 'Sigilyph' THEN 'Flying' WHEN 'Carracosta' THEN 'Rock'
+ WHEN 'Archeops' THEN 'Flying' WHEN 'Swanna' THEN 'Flying' WHEN 'Sawsbuck' THEN 'Grass'
+ WHEN 'Emolga' THEN 'Flying' WHEN 'Whimsicott' THEN 'Fairy' WHEN 'Escavalier' THEN 'Steel' WHEN 'Amoonguss' THEN 'Poison'
+ WHEN 'Jellicent' THEN 'Ghost' WHEN 'Galvantula' THEN 'Electric' WHEN 'Ferrothorn' THEN 'Steel'
+ WHEN 'Chandelure' THEN 'Fire' WHEN 'Stunfisk' THEN 'Electric' WHEN 'Golurk' THEN 'Ghost'
+ WHEN 'Bisharp' THEN 'Steel' WHEN 'Braviary' THEN 'Flying' WHEN 'Mandibuzz' THEN 'Flying'
+ WHEN 'Durant' THEN 'Steel' WHEN 'Hydreigon' THEN 'Dark' WHEN 'Volcarona' THEN 'Fire'
+ ELSE NULL END;
+
+-- Balanceamento global: HP máximo +60% (arredondado ao inteiro mais próximo).
+UPDATE POKEMON SET vida_pokemon = CAST(ROUND(vida_pokemon * 1.6) AS INT);
+
  INSERT INTO ATAQUE (nome_ataque, tipo_ataque, dano_ataque) VALUES
  ('Blue Flare', 'Fire', 130),
  ('Flare Blitz', 'Fire', 120),
@@ -164,6 +183,9 @@ VALUES ('Serperior', 'Grass', 'Fire', 75),
 ('Hyper Beam', 'Normal', 150),
 ('Double-Edge', 'Normal', 120),
 ('Return', 'Normal', 102);
+
+-- Balanceamento global dos golpes: redução de 25%, com arredondamento ao inteiro mais próximo.
+UPDATE ATAQUE SET dano_ataque = CAST(ROUND(dano_ataque * 0.75) AS INT);
 
 INSERT INTO POKEMON_ATAQUE (id_pokemon, id_ataque) VALUES
   ((SELECT id_pokemon FROM POKEMON WHERE nome_pokemon='Serperior'), (SELECT id_ataque FROM ATAQUE WHERE nome_ataque='Energy Ball')),
